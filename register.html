@@ -2,37 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BRHELPDESK - Register</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #ff6a00, #ee0979);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    iframe {
-      width: 100%;
-      height: 700px;
-      border: none;
-      background-color: #fff;
-    }
-  </style>
+  <title>BRHelpdesk Register</title>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
   <div class="container">
-    <h2>Register to BRHELPDESK</h2>
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScZg8YEXAMPLE_FORM_LINK/viewform?embedded=true">Loading…</iframe>
+    <h2>Register</h2>
+    <form action="tasks.html">
+      <input type="text" placeholder="Name" required><br>
+      <input type="text" placeholder="Mobile Number" required><br>
+      <input type="password" placeholder="Password" required><br>
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="index.html">Login</a></p>
   </div>
 </body>
 </html>
