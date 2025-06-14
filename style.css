@@ -1,21 +1,18 @@
+
 body {
-  font-family: sans-serif;
-  text-align: center;
-  background: #f2f2f2;
+  background: #f0f0f0;
+  font-family: Arial;
+}
+.container {
+  width: 300px;
+  margin: 40px auto;
   padding: 20px;
+  background: white;
+  border-radius: 10px;
+  text-align: center;
 }
 input, button {
-  margin: 10px;
+  width: 90%;
   padding: 10px;
-  width: 80%;
-  max-width: 300px;
-}
-button {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-a {
-  color: blue;
+  margin: 8px 0;
 }
