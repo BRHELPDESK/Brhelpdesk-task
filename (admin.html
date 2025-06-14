@@ -1,14 +1,25 @@
-<?php
-$data = json_decode(file_get_contents('users.json'), true);
 
-$newUser = [
-  'name' => $_POST['name'],
-  'email' => $_POST['email'],
-  'referral' => $_POST['referral'],
-];
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Referrals</title>
+</head>
+<body>
+  <h2>Referral List</h2>
+  <button onclick="loadData()">Load Referrals</button>
+  <ul id="list"></ul>
 
-$data[] = $newUser;
-file_put_contents('users.json', json_encode($data, JSON_PRETTY_PRINT));
+  <script>
+    async function loadData() {
+      const res = await fetch('users.json');
+      const users = await res.json();
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+      users.forEach(user => {
+        list.innerHTML += `<li>${user.name} (${user.email}) referred by: ${user.referral || "None"}</li>`;
+      });
+    }
+  </script>
+</body>
+</html>
 
-echo "Registered Successfully!";
-?>
