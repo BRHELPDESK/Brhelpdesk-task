@@ -47,3 +47,52 @@ button {
   color: white;
   font-weight: bold;
 }
+body {
+  background:#f9f9f9;
+  font-family:Arial,sans-serif;
+  margin:0;
+  padding:0;
+  text-align:center;
+}
+header {
+  background:#0072ff;
+  color:#fff;
+  padding:20px;
+}
+.coming {
+  color:#ffe100;
+  font-size:16px;
+  margin-top:10px;
+}
+ul.menu, ul.tasks {
+  list-style:none;
+  padding:0;
+  margin:20px auto;
+  max-width:400px;
+}
+ul.menu li, ul.tasks li {
+  margin:10px 0;
+}
+ul.menu a, ul.tasks a, footer a {
+  text-decoration:none;
+  color:#0072ff;
+  font-size:18px;
+}
+input, button {
+  display:block;
+  width:80%;
+  margin:10px auto;
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:4px;
+}
+button {
+  background:#00c4ff;
+  color:#fff;
+  border:none;
+  font-weight:bold;
+}
+footer {
+  margin:20px auto;
+  padding:10px;
+}
