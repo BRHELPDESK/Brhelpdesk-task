@@ -1,0 +1,14 @@
+<?php
+$data = json_decode(file_get_contents('users.json'), true);
+
+$newUser = [
+  'name' => $_POST['name'],
+  'email' => $_POST['email'],
+  'referral' => $_POST['referral'],
+];
+
+$data[] = $newUser;
+file_put_contents('users.json', json_encode($data, JSON_PRETTY_PRINT));
+
+echo "Registered Successfully!";
+?>
