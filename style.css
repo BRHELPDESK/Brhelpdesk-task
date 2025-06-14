@@ -1,1 +1,62 @@
 body { font-family: Arial, sans-serif; padding: 20px; background: #f2f2f2; } input, button { margin: 5px; }
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.coming-soon {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+main {
+  padding: 20px;
+}
+
+.task-links h2 {
+  text-align: center;
+}
+
+.task-links ul {
+  list-style-type: none;
+  padding: 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.task-links li {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.task-links li:hover {
+  background-color: #e6f7ff;
+}
+
+.task-links a {
+  text-decoration: none;
+  color: #0072ff;
+  font-weight: bold;
+}
+
+footer {
+  background-color: #f0f0f0;
+  text-align: center;
+  padding: 10px;
+  margin-top: 40px;
+}
