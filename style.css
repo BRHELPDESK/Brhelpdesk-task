@@ -21,3 +21,29 @@ nav a {
     color: red;
     font-weight: bold;
 }
+body {
+  background: #f1f1f1;
+  font-family: sans-serif;
+  text-align: center;
+}
+.container {
+  padding: 20px;
+}
+.form-box {
+  margin: 20px auto;
+  width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+input, button {
+  width: 90%;
+  padding: 10px;
+  margin: 10px 0;
+}
+button {
+  background: #00c4ff;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
