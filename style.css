@@ -1,98 +1,24 @@
-
 body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    text-align: center;
-    padding: 20px;
-}
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-nav a {
-    margin: 10px;
-    text-decoration: none;
-    color: blue;
-}
-.coming-soon {
-    margin-top: 20px;
-    color: red;
-    font-weight: bold;
-}
-body {
+  font-family: Arial, sans-serif;
   background: #f1f1f1;
-  font-family: sans-serif;
   text-align: center;
-}
-.container {
   padding: 20px;
 }
-.form-box {
-  margin: 20px auto;
-  width: 300px;
-  background: white;
-  padding: 20px;
+
+h1, h2 {
+  color: #333;
+}
+
+.menu a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background: #00bcd4;
+  color: #fff;
+  text-decoration: none;
   border-radius: 8px;
 }
-input, button {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
-}
-button {
-  background: #00c4ff;
-  border: none;
-  color: white;
-  font-weight: bold;
-}
-body {
-  background:#f9f9f9;
-  font-family:Arial,sans-serif;
-  margin:0;
-  padding:0;
-  text-align:center;
-}
-header {
-  background:#0072ff;
-  color:#fff;
-  padding:20px;
-}
-.coming {
-  color:#ffe100;
-  font-size:16px;
-  margin-top:10px;
-}
-ul.menu, ul.tasks {
-  list-style:none;
-  padding:0;
-  margin:20px auto;
-  max-width:400px;
-}
-ul.menu li, ul.tasks li {
-  margin:10px 0;
-}
-ul.menu a, ul.tasks a, footer a {
-  text-decoration:none;
-  color:#0072ff;
-  font-size:18px;
-}
-input, button {
-  display:block;
-  width:80%;
-  margin:10px auto;
-  padding:10px;
-  border:1px solid #ccc;
-  border-radius:4px;
-}
-button {
-  background:#00c4ff;
-  color:#fff;
-  border:none;
-  font-weight:bold;
-}
-footer {
-  margin:20px auto;
-  padding:10px;
+
+form {
+  margin-top: 20px;
 }
