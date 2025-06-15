@@ -1,14 +1,33 @@
 function register() {
-  var email = document.getElementById("email").value;
-  var password = document.getElementById("password").value;
-  firebase.auth().createUserWithEmailAndPassword(email, password)
-    .then(user => alert("Registered Successfully"))
-    .catch(error => alert(error.message));
+  const name = document.getElementById('name').value;
+  const mobile = document.getElementById('mobile').value;
+  const password = document.getElementById('password').value;
+
+  if (!name || !mobile || !password) {
+    alert('All fields required!');
+    return;
+  }
+
+  const user = { name, mobile, password };
+  localStorage.setItem(mobile, JSON.stringify(user));
+  alert('Registered successfully!');
 }
+
 function login() {
-  var email = document.getElementById("loginEmail").value;
-  var password = document.getElementById("loginPassword").value;
-  firebase.auth().signInWithEmailAndPassword(email, password)
-    .then(user => alert("Login Success"))
-    .catch(error => alert(error.message));
+  const loginName = document.getElementById('loginName').value;
+  const loginPassword = document.getElementById('loginPassword').value;
+
+  const storedUser = localStorage.getItem(loginName);
+  if (!storedUser) {
+    alert('User not found!');
+    return;
+  }
+
+  const user = JSON.parse(storedUser);
+  if (user.password === loginPassword) {
+    alert('Login successful!');
+    window.location.href = 'task.html';
+  } else {
+    alert('Wrong password!');
+  }
 }
