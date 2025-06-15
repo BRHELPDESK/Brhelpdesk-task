@@ -17,3 +17,53 @@
   </form>
 </body>
 </html>
+<!DOCTYPE html><html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BR Helpdesk - Register</title>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";const firebaseConfig = {
+  apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
+  authDomain: "brhelpdesk-6a014.firebaseapp.com",
+  databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "brhelpdesk-6a014",
+  storageBucket: "brhelpdesk-6a014.appspot.com",
+  messagingSenderId: "559099521764",
+  appId: "1:559099521764:web:34871192eb8085f89f1af1",
+  measurementId: "G-NTBKQW42TY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Get referral ID from URL if exists
+const urlParams = new URLSearchParams(window.location.search);
+const referralId = urlParams.get('ref') || "none";
+
+document.getElementById("registerBtn").addEventListener("click", () => {
+  const name = document.getElementById("name").value;
+  const mobile = document.getElementById("mobile").value;
+  if (!name || !mobile) return alert("Please fill all fields");
+
+  set(ref(db, 'users/' + mobile), {
+    name: name,
+    mobile: mobile,
+    referredBy: referralId,
+    joinedAt: new Date().toISOString()
+  }).then(() => {
+    alert("Registered Successfully!");
+    window.location.href = "welcome.html";
+  });
+});
+
+  </script>
+</head>
+<body>
+  <h2>BR Helpdesk - Register</h2>
+  <input type="text" id="name" placeholder="Your Name"><br><br>
+  <input type="text" id="mobile" placeholder="Mobile Number"><br><br>
+  <button id="registerBtn">Register</button>
+</body>
+</html>
