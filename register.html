@@ -1,65 +1,15 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Register - BR HelpDesk</title>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; background-color: #f0f2f5; padding: 20px; }
-    .container { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    input[type=text], input[type=tel] { width: 100%; padding: 10px; margin: 10px 0; }
-    button { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #218838; }
-  </style>
+  <title>Register</title>
 </head>
 <body>
-  <div class="container">
-    <h2>Register</h2>
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="tel" id="phone" placeholder="Phone Number" required>
-    <button onclick="register()">Register</button>
-    <p id="status" style="margin-top: 10px;"></p>
-  </div>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
-      authDomain: "brhelpdesk-6a014.firebaseapp.com",
-      databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "brhelpdesk-6a014",
-      storageBucket: "brhelpdesk-6a014.appspot.com",
-      messagingSenderId: "559099521764",
-      appId: "1:559099521764:web:34871192eb8085f89f1af1",
-      measurementId: "G-NTBKQW42TY"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    const refCode = new URLSearchParams(window.location.search).get("ref") || "NoRef";
-
-    function register() {
-      const name = document.getElementById('name').value;
-      const phone = document.getElementById('phone').value;
-
-      if (!name || !phone) {
-        document.getElementById('status').textContent = "Please enter all details.";
-        return;
-      }
-
-      db.ref("users/" + phone).set({
-        name: name,
-        phone: phone,
-        referrer: refCode,
-        timestamp: new Date().toISOString()
-      }).then(() => {
-        document.getElementById('status').textContent = "Registration Successful ✅";
-      }).catch((error) => {
-        document.getElementById('status').textContent = "Error: " + error.message;
-      });
-    }
-  </script>
+  <h2>Register with Referral</h2>
+  <input type="text" id="referral" placeholder="Referral ID"><br>
+  <input type="email" id="email" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="register()">Register</button>
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
