@@ -1,69 +1,65 @@
 
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register</title>
-</head>
-<body>
-  <h2>Register</h2>
-  <form>
-    Name: <input type="text" /><br/>
-    Email: <input type="email" /><br/>
-    Password: <input type="password" /><br/>
-    Referral Code: <input type="text" /><br/>
-    <button type="submit">Register</button>
-  </form>
-</body>
-</html>
-<!DOCTYPE html><html>
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BR Helpdesk - Register</title>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";const firebaseConfig = {
-  apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
-  authDomain: "brhelpdesk-6a014.firebaseapp.com",
-  databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "brhelpdesk-6a014",
-  storageBucket: "brhelpdesk-6a014.appspot.com",
-  messagingSenderId: "559099521764",
-  appId: "1:559099521764:web:34871192eb8085f89f1af1",
-  measurementId: "G-NTBKQW42TY"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// Get referral ID from URL if exists
-const urlParams = new URLSearchParams(window.location.search);
-const referralId = urlParams.get('ref') || "none";
-
-document.getElementById("registerBtn").addEventListener("click", () => {
-  const name = document.getElementById("name").value;
-  const mobile = document.getElementById("mobile").value;
-  if (!name || !mobile) return alert("Please fill all fields");
-
-  set(ref(db, 'users/' + mobile), {
-    name: name,
-    mobile: mobile,
-    referredBy: referralId,
-    joinedAt: new Date().toISOString()
-  }).then(() => {
-    alert("Registered Successfully!");
-    window.location.href = "welcome.html";
-  });
-});
-
-  </script>
+  <title>Register - BR HelpDesk</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f0f2f5; padding: 20px; }
+    .container { max-width: 400px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    input[type=text], input[type=tel] { width: 100%; padding: 10px; margin: 10px 0; }
+    button { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background: #218838; }
+  </style>
 </head>
 <body>
-  <h2>BR Helpdesk - Register</h2>
-  <input type="text" id="name" placeholder="Your Name"><br><br>
-  <input type="text" id="mobile" placeholder="Mobile Number"><br><br>
-  <button id="registerBtn">Register</button>
+  <div class="container">
+    <h2>Register</h2>
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="tel" id="phone" placeholder="Phone Number" required>
+    <button onclick="register()">Register</button>
+    <p id="status" style="margin-top: 10px;"></p>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
+      authDomain: "brhelpdesk-6a014.firebaseapp.com",
+      databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "brhelpdesk-6a014",
+      storageBucket: "brhelpdesk-6a014.appspot.com",
+      messagingSenderId: "559099521764",
+      appId: "1:559099521764:web:34871192eb8085f89f1af1",
+      measurementId: "G-NTBKQW42TY"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const refCode = new URLSearchParams(window.location.search).get("ref") || "NoRef";
+
+    function register() {
+      const name = document.getElementById('name').value;
+      const phone = document.getElementById('phone').value;
+
+      if (!name || !phone) {
+        document.getElementById('status').textContent = "Please enter all details.";
+        return;
+      }
+
+      db.ref("users/" + phone).set({
+        name: name,
+        phone: phone,
+        referrer: refCode,
+        timestamp: new Date().toISOString()
+      }).then(() => {
+        document.getElementById('status').textContent = "Registration Successful ✅";
+      }).catch((error) => {
+        document.getElementById('status').textContent = "Error: " + error.message;
+      });
+    }
+  </script>
 </body>
 </html>
