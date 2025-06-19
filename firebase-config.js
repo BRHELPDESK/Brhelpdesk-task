@@ -1,3 +1,4 @@
+
 const firebaseConfig = {
   apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
   authDomain: "brhelpdesk-6a014.firebaseapp.com",
@@ -8,4 +9,5 @@ const firebaseConfig = {
   appId: "1:559099521764:web:34871192eb8085f89f1af1",
   measurementId: "G-NTBKQW42TY"
 };
+
 firebase.initializeApp(firebaseConfig);
