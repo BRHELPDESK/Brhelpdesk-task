@@ -1,94 +1,25 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BRHelpdesk Dashboard</title>
   <meta charset="UTF-8" />
-</head>
-<body>
-  <h1>Welcome to BRHelpdesk</h1>
-  <a href="register.html">Register</a><br/>
-  <a href="login.html">Login</a><br/>
-  <a href="task.html">View Tasks</a>
-</body>
-</html>
-
-<!DOCTYPE html><html>
-<head>
-  <title>BRHelpdesk Task</title>
-  <script type="module">
-    // Firebase SDK
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
-    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";// Firebase config
-const firebaseConfig = {
-  apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
-  authDomain: "brhelpdesk-6a014.firebaseapp.com",
-  databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "brhelpdesk-6a014",
-  storageBucket: "brhelpdesk-6a014.appspot.com",
-  messagingSenderId: "559099521764",
-  appId: "1:559099521764:web:34871192eb8085f89f1af1",
-  measurementId: "G-NTBKQW42TY"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// Submit handler
-window.submitForm = () => {
-  const name = document.getElementById('name').value;
-  const phone = document.getElementById('phone').value;
-
-  if (name && phone) {
-    const userRef = ref(db, 'users');
-    const newUser = push(userRef);
-
-    set(newUser, {
-      name: name,
-      phone: phone,
-      timestamp: new Date().toISOString()
-    })
-    .then(() => {
-      alert("Joining Success ✅\nThank you for joining BRHelpdesk Task");
-      document.getElementById('name').value = "";
-      document.getElementById('phone').value = "";
-    })
-    .catch((error) => {
-      alert("❌ Failed to Save: " + error);
-    });
-  } else {
-    alert("Please fill both name and phone");
-  }
-}
-
-  </script>
-</head>
-<body style="font-family: sans-serif; padding: 20px; background: #f5f5f5">
-  <h2>🧑‍💼 BRHELPDESK TASK - JOIN NOW</h2>
-  <label>Name:</label><br>
-  <input type="text" id="name" placeholder="Enter your name" /><br><br>
-  <label>Phone:</label><br>
-  <input type="text" id="phone" placeholder="Enter your phone number" /><br><br>
-  <button onclick="submitForm()">✅ Join</button>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>BRHELPDESK | Task Registration</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRHELPDESK Task</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>BRHELPDESK TASK</h1>
-    <input type="text" id="name" placeholder="Full Name">
-    <input type="text" id="phone" placeholder="Phone Number">
-    <input type="text" id="referral" placeholder="Referral Code">
-    <button onclick="registerUser()">Join Now</button>
-    <p id="status"></p>
+    <h1>BRHELPDESK TASK JOIN FORM</h1>
+    <form id="joinForm">
+      <input type="text" id="name" placeholder="Name" required /><br />
+      <input type="text" id="phone" placeholder="Phone Number" required /><br />
+      <input type="text" id="referral" placeholder="Referral Code (optional)" /><br />
+      <button type="submit">Join Now</button>
+    </form>
+    <p id="message"></p>
   </div>
-
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
   <script src="firebase-config.js"></script>
   <script src="script.js"></script>
 </body>
