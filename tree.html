@@ -1,60 +1,57 @@
-<!DOCTYPE html><html>
-<head>
-  <meta charset="UTF-8">
-  <title>Referral Tree Viewer</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 20px; }
-    #treeOutput ul { list-style-type: none; padding-left: 20px; }
-    .node { margin: 4px 0; }
-    input, button { padding: 8px; font-size: 16px; margin-right: 10px; }
-  </style>
-</head>
-<body>
-  <h2>Referral Tree Viewer (Downline Only)</h2>
-  <input type="text" id="userIdInput" placeholder="Enter Your ID (e.g., R1001)">
-  <button onclick="loadTree()">View Tree</button>
-  <div id="treeOutput"></div>  <script>
-    const firebaseConfig = {
-      databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    let allUsers = {};
-
-    function loadTree() {
-      const userId = document.getElementById("userIdInput").value.trim();
-      if (!userId) return alert("Please enter your ID");
-
-      db.ref("users").once("value").then(snapshot => {
-        allUsers = snapshot.val() || {};
-        const output = buildTree(userId, 0);
-        document.getElementById("treeOutput").innerHTML = output;
-      });
-    }
-
-    function buildTree(rootId, level) {
-      if (!allUsers[rootId]) return `<div class='node'>❌ ID ${rootId} not found</div>`;
-
-      let html = `<ul><li class='node'>👤 ${rootId} (${allUsers[rootId].name || "No Name"})</li>`;
-      const children = Object.keys(allUsers).filter(uid => allUsers[uid].referId === rootId);
-
-      for (const childId of children) {
-        html += buildTree(childId, level + 1);
-      }
-      html += '</ul>';
-      return html;
-    }
-  </script></body>
-</html>
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Referral Tree - Downline</title>
+  <title>BRHELPDESK Referral Tree</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff6ec4, #7873f5);
+      color: white;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px #000;
+    }
+
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      margin: 5px;
+    }
+
+    input {
+      width: 60%;
+      max-width: 300px;
+    }
+
+    button {
+      background-color: #00e676;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #tree {
+      margin-top: 20px;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .user {
+      margin-left: 20px;
+      padding: 5px 0;
+    }
+  </style>
+
   <script type="module">
-    // Firebase Config
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
@@ -65,14 +62,12 @@
       projectId: "brhelpdesk-6a014",
       storageBucket: "brhelpdesk-6a014.appspot.com",
       messagingSenderId: "559099521764",
-      appId: "1:559099521764:web:34871192eb8085f89f1af1",
-      measurementId: "G-NTBKQW42TY"
+      appId: "1:559099521764:web:34871192eb8085f89f1af1"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
 
-    // Referral Tree Viewer
     async function loadTree(userId) {
       const dbRef = ref(db);
       const userRef = child(dbRef, 'users');
@@ -86,13 +81,13 @@
         const users = snapshot.val();
         for (let key in users) {
           if (users[key].referrer === uid) {
-            html += '<div style="margin-left:' + (level * 20) + 'px">👤 ' + users[key].name + ' (ID: ' + key + ')</div>';
+            html += '<div class="user" style="margin-left:' + (level * 20) + 'px">🌿 ' + users[key].name + ' (ID: ' + key + ')</div>';
             await getDownlines(key, level + 1);
           }
         }
       }
 
-      html = '<h3>Referral Tree for User ID: ' + userId + '</h3>';
+      html = '<h3>Referral Tree for ID: ' + userId + '</h3>';
       await getDownlines(userId);
       document.getElementById("tree").innerHTML = html || "<p>No downline users found.</p>";
     }
@@ -101,10 +96,11 @@
   </script>
 </head>
 <body>
-  <h2>🔗 View Your Referral Tree</h2>
-  <input type="text" id="userId" placeholder="Enter Your User ID">
-  <button onclick="loadTree(document.getElementById('userId').value)">View Tree</button>
-  <hr>
+  <h2>🌳 BRHELPDESK Referral Tree</h2>
+  <div style="text-align:center;">
+    <input type="text" id="userId" placeholder="Enter Your User ID">
+    <button onclick="loadTree(document.getElementById('userId').value)">View Tree</button>
+  </div>
   <div id="tree"></div>
 </body>
 </html>
