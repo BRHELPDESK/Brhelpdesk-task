@@ -12,3 +12,62 @@
 </body>
 </html>
 
+<!DOCTYPE html><html>
+<head>
+  <title>BRHelpdesk Task</title>
+  <script type="module">
+    // Firebase SDK
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+    import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js";// Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
+  authDomain: "brhelpdesk-6a014.firebaseapp.com",
+  databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "brhelpdesk-6a014",
+  storageBucket: "brhelpdesk-6a014.appspot.com",
+  messagingSenderId: "559099521764",
+  appId: "1:559099521764:web:34871192eb8085f89f1af1",
+  measurementId: "G-NTBKQW42TY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Submit handler
+window.submitForm = () => {
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+
+  if (name && phone) {
+    const userRef = ref(db, 'users');
+    const newUser = push(userRef);
+
+    set(newUser, {
+      name: name,
+      phone: phone,
+      timestamp: new Date().toISOString()
+    })
+    .then(() => {
+      alert("Joining Success ✅\nThank you for joining BRHelpdesk Task");
+      document.getElementById('name').value = "";
+      document.getElementById('phone').value = "";
+    })
+    .catch((error) => {
+      alert("❌ Failed to Save: " + error);
+    });
+  } else {
+    alert("Please fill both name and phone");
+  }
+}
+
+  </script>
+</head>
+<body style="font-family: sans-serif; padding: 20px; background: #f5f5f5">
+  <h2>🧑‍💼 BRHELPDESK TASK - JOIN NOW</h2>
+  <label>Name:</label><br>
+  <input type="text" id="name" placeholder="Enter your name" /><br><br>
+  <label>Phone:</label><br>
+  <input type="text" id="phone" placeholder="Enter your phone number" /><br><br>
+  <button onclick="submitForm()">✅ Join</button>
+</body>
+</html>
