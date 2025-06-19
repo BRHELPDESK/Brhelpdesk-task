@@ -1,0 +1,51 @@
+<!DOCTYPE html><html>
+<head>
+  <meta charset="UTF-8">
+  <title>Referral Tree Viewer</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f8ff; padding: 20px; }
+    #treeOutput ul { list-style-type: none; padding-left: 20px; }
+    .node { margin: 4px 0; }
+    input, button { padding: 8px; font-size: 16px; margin-right: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Referral Tree Viewer (Downline Only)</h2>
+  <input type="text" id="userIdInput" placeholder="Enter Your ID (e.g., R1001)">
+  <button onclick="loadTree()">View Tree</button>
+  <div id="treeOutput"></div>  <script>
+    const firebaseConfig = {
+      databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let allUsers = {};
+
+    function loadTree() {
+      const userId = document.getElementById("userIdInput").value.trim();
+      if (!userId) return alert("Please enter your ID");
+
+      db.ref("users").once("value").then(snapshot => {
+        allUsers = snapshot.val() || {};
+        const output = buildTree(userId, 0);
+        document.getElementById("treeOutput").innerHTML = output;
+      });
+    }
+
+    function buildTree(rootId, level) {
+      if (!allUsers[rootId]) return `<div class='node'>❌ ID ${rootId} not found</div>`;
+
+      let html = `<ul><li class='node'>👤 ${rootId} (${allUsers[rootId].name || "No Name"})</li>`;
+      const children = Object.keys(allUsers).filter(uid => allUsers[uid].referId === rootId);
+
+      for (const childId of children) {
+        html += buildTree(childId, level + 1);
+      }
+      html += '</ul>';
+      return html;
+    }
+  </script></body>
+</html>
