@@ -49,3 +49,62 @@
     }
   </script></body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Referral Tree - Downline</title>
+  <script type="module">
+    // Firebase Config
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
+      authDomain: "brhelpdesk-6a014.firebaseapp.com",
+      databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "brhelpdesk-6a014",
+      storageBucket: "brhelpdesk-6a014.appspot.com",
+      messagingSenderId: "559099521764",
+      appId: "1:559099521764:web:34871192eb8085f89f1af1",
+      measurementId: "G-NTBKQW42TY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Referral Tree Viewer
+    async function loadTree(userId) {
+      const dbRef = ref(db);
+      const userRef = child(dbRef, 'users');
+
+      let html = '';
+
+      async function getDownlines(uid, level = 0) {
+        let snapshot = await get(userRef);
+        if (!snapshot.exists()) return;
+
+        const users = snapshot.val();
+        for (let key in users) {
+          if (users[key].referrer === uid) {
+            html += '<div style="margin-left:' + (level * 20) + 'px">👤 ' + users[key].name + ' (ID: ' + key + ')</div>';
+            await getDownlines(key, level + 1);
+          }
+        }
+      }
+
+      html = '<h3>Referral Tree for User ID: ' + userId + '</h3>';
+      await getDownlines(userId);
+      document.getElementById("tree").innerHTML = html || "<p>No downline users found.</p>";
+    }
+
+    window.loadTree = loadTree;
+  </script>
+</head>
+<body>
+  <h2>🔗 View Your Referral Tree</h2>
+  <input type="text" id="userId" placeholder="Enter Your User ID">
+  <button onclick="loadTree(document.getElementById('userId').value)">View Tree</button>
+  <hr>
+  <div id="tree"></div>
+</body>
+</html>
