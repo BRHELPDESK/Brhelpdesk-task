@@ -1,22 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>BRHELPDESK Referral Tree</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Referral Tree Viewer</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #ff6ec4, #7873f5);
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
       color: white;
       padding: 20px;
     }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 2px #000;
-    }
-
     input, button {
       padding: 10px;
       font-size: 16px;
@@ -24,83 +17,60 @@
       border: none;
       margin: 5px;
     }
-
-    input {
-      width: 60%;
-      max-width: 300px;
-    }
-
-    button {
-      background-color: #00e676;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
     #tree {
       margin-top: 20px;
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 15px;
+      padding: 20px;
+      background-color: white;
+      color: black;
       border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
     }
-
-    .user {
-      margin-left: 20px;
-      padding: 5px 0;
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
     }
   </style>
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDRkHfkz-kGRN6OgWmq2Hi9lqYENP6GJbg",
-      authDomain: "brhelpdesk-6a014.firebaseapp.com",
-      databaseURL: "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "brhelpdesk-6a014",
-      storageBucket: "brhelpdesk-6a014.appspot.com",
-      messagingSenderId: "559099521764",
-      appId: "1:559099521764:web:34871192eb8085f89f1af1"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    async function loadTree(userId) {
-      const dbRef = ref(db);
-      const userRef = child(dbRef, 'users');
-
-      let html = '';
-
-      async function getDownlines(uid, level = 0) {
-        let snapshot = await get(userRef);
-        if (!snapshot.exists()) return;
-
-        const users = snapshot.val();
-        for (let key in users) {
-          if (users[key].referrer === uid) {
-            html += '<div class="user" style="margin-left:' + (level * 20) + 'px">🌿 ' + users[key].name + ' (ID: ' + key + ')</div>';
-            await getDownlines(key, level + 1);
-          }
-        }
-      }
-
-      html = '<h3>Referral Tree for ID: ' + userId + '</h3>';
-      await getDownlines(userId);
-      document.getElementById("tree").innerHTML = html || "<p>No downline users found.</p>";
-    }
-
-    window.loadTree = loadTree;
-  </script>
 </head>
 <body>
-  <h2>🌳 BRHELPDESK Referral Tree</h2>
-  <div style="text-align:center;">
-    <input type="text" id="userId" placeholder="Enter Your User ID">
-    <button onclick="loadTree(document.getElementById('userId').value)">View Tree</button>
-  </div>
+  <h2>BR Helpdesk Referral Tree</h2>
+  <input type="text" id="userId" placeholder="Enter Your ID">
+  <button onclick="loadTree()">View My Team</button>
   <div id="tree"></div>
+
+  <script>
+    const dbURL = "https://brhelpdesk-6a014-default-rtdb.asia-southeast1.firebasedatabase.app/users.json";
+
+    async function fetchUsers() {
+      const res = await fetch(dbURL);
+      const data = await res.json();
+      return data;
+    }
+
+    async function loadTree() {
+      const userId = document.getElementById("userId").value.trim();
+      if (!userId) {
+        alert("Please enter your ID");
+        return;
+      }
+
+      const users = await fetchUsers();
+      const tree = document.getElementById("tree");
+      tree.innerHTML = "";
+
+      const buildTree = (parentId) => {
+        const ul = document.createElement("ul");
+        for (let key in users) {
+          if (users[key].referral === parentId) {
+            const li = document.createElement("li");
+            li.textContent = users[key].name + " (ID: " + users[key].id + ")";
+            li.appendChild(buildTree(users[key].id));
+            ul.appendChild(li);
+          }
+        }
+        return ul;
+      };
+
+      tree.appendChild(buildTree(userId));
+    }
+  </script>
 </body>
 </html>
