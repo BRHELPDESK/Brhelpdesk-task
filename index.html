@@ -71,3 +71,25 @@ window.submitForm = () => {
   <button onclick="submitForm()">✅ Join</button>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BRHELPDESK | Task Registration</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>BRHELPDESK TASK</h1>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="text" id="phone" placeholder="Phone Number">
+    <input type="text" id="referral" placeholder="Referral Code">
+    <button onclick="registerUser()">Join Now</button>
+    <p id="status"></p>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
