@@ -1,73 +1,90 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BRHELPDESK Task</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>BRHELPDESK TASK JOIN FORM</h1>
-    <form id="joinForm">
-      <input type="text" id="name" placeholder="Name" required /><br />
-      <input type="text" id="phone" placeholder="Phone Number" required /><br />
-      <input type="text" id="referral" placeholder="Referral Code (optional)" /><br />
-      <button type="submit">Join Now</button>
-    </form>
-    <p id="message"></p>
-  </div>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="script.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ml">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BRHELPDESK Task Page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BRHELPDESK Task Center</title>
   <style>
     body {
-      background: linear-gradient(to bottom right, #00c6ff, #0072ff);
-      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #00c3ff, #0072ff);
       color: white;
+      font-family: Arial, sans-serif;
+      padding: 30px 10px;
       text-align: center;
-      padding: 50px 20px;
     }
     h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+    .form-box {
+      background: white;
+      color: #000;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: 0 auto 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
     }
     .task-box {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
+      background: rgba(255,255,255,0.15);
       padding: 20px;
-      margin: 20px auto;
-      max-width: 400px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      margin-top: 20px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .task-box p {
+      font-size: 18px;
+      margin: 10px 0;
     }
     .task-box a {
       color: #ffe600;
       font-weight: bold;
       text-decoration: none;
     }
-    .task-box a:hover {
-      text-decoration: underline;
+    .footer {
+      margin-top: 30px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <h1>BRHELPDESK ടാസ്‌ക് സെന്റർ</h1>
+
+  <div class="form-box">
+    <h2>Join BRHELPDESK</h2>
+    <input type="text" placeholder="Name">
+    <input type="tel" placeholder="Phone Number">
+    <input type="text" placeholder="Referral Code (optional)">
+    <button>Join Now</button>
+  </div>
+
+  <h1>BRHELPDESK Task Center</h1>
+
   <div class="task-box">
     <p>✅ Task 1: <a href="#">Roz Dhan App Join Link</a></p>
     <p>✅ Task 2: <a href="#">CashKaro Join Link</a></p>
     <p>✅ Task 3: <a href="#">Share.Market Join Link</a></p>
     <p>✅ Task 4: <a href="#">Frizza App Join Link</a></p>
   </div>
-  <p>👉 എല്ലാ ലിങ്കുകളും BRHELPDESK App Referral Hub-ൽ നിന്നും സ്വീകരിക്കണം.</p>
+
+  <div class="footer">
+    👉 All referral links must be completed through the BRHELPDESK Referral Hub.
+  </div>
+
 </body>
 </html>
