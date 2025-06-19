@@ -13,3 +13,86 @@
   </ul>
 </body>
 </html>
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRHELPDESK Referral Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #d53369, #daae51);
+      color: #fff;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .task {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+    .task a {
+      color: #ffff00;
+      text-decoration: underline;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .checkbox {
+      margin-top: 10px;
+    }
+    .checkbox label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>BRHELPDESK - Referral Task</h1>  <div class="task">
+    <h3>Task 1: AirAI – Earn Real Money</h3>
+    <a href="https://play.google.com/store/apps/details?id=in.airai.earningapps.earnrealmoney.earneasily.earninggames" target="_blank">Click to Install</a>
+    <div class="checkbox">
+      <input type="checkbox" id="task1">
+      <label for="task1">I have completed this task</label>
+    </div>
+  </div>  <div class="task">
+    <h3>Task 2: ChampCash</h3>
+    <a href="https://play.google.com/store/apps/details?id=com.srdeducation.champcash" target="_blank">Click to Install</a>
+    <div class="checkbox">
+      <input type="checkbox" id="task2">
+      <label for="task2">I have completed this task</label>
+    </div>
+  </div>  <div class="task">
+    <h3>Task 3: MyCash – DM Games</h3>
+    <a href="https://play.google.com/store/apps/details?id=com.DMGames.MyCash" target="_blank">Click to Install</a>
+    <div class="checkbox">
+      <input type="checkbox" id="task3">
+      <label for="task3">I have completed this task</label>
+    </div>
+  </div>  <div class="task">
+    <h3>Task 4: ApexToken (Crypto)</h3>
+    <a href="https://phase2.apextoken.io/exchange/register/?ref=0x8D47a31C76092749190502F389152EE3534C0f2a&position=left" target="_blank">Click to Register</a>
+    <div class="checkbox">
+      <input type="checkbox" id="task4">
+      <label for="task4">I have completed this task</label>
+    </div>
+  </div>  <div class="task">
+    <h3>Task 5: Freecash</h3>
+    <a href="https://freecash.com/r/75f5d339e08df52fe5c6" target="_blank">Click to Join</a>
+    <div class="checkbox">
+      <input type="checkbox" id="task5">
+      <label for="task5">I have completed this task</label>
+    </div>
+  </div>  <script>
+    // Local save task checks (can be improved to sync with Firebase later)
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      const id = checkbox.id;
+      checkbox.checked = localStorage.getItem(id) === 'true';
+      checkbox.addEventListener('change', () => {
+        localStorage.setItem(id, checkbox.checked);
+      });
+    });
+  </script></body>
+</html>
